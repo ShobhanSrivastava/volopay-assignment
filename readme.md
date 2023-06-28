@@ -1,7 +1,24 @@
+- Installation
+    - Use the following commands in the terminal to start the server
+    ```
+    git clone git@github.com:ShobhanSrivastava/volopay-assignment.git
+    cd volopay-assignment
+    ```
+    - Create .env file from .env.example
+    ```
+    npm install
+    ```
+
 - DB USED: SQLITE3
 
-- TABLE CREATED USING 
+- Create new file called mydb.db in the root folder
+- Open terminal in the root folder
+- Use commands 
 ```
+sqlite3
+
+.open mydb.db
+
 CREATE TABLE sales_data(id NUMBER PRIMARY KEY,
 date VARCHAR2,
 user VARCHAR2,
