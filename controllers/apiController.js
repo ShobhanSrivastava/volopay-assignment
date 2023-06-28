@@ -1,10 +1,12 @@
-import { validDatetime, validDepartment } from "../validators";
+import { validDatetime, validDepartment } from "../validators/index.js";
+import { getTotalItems, getPercentage, getNthMostTotalItem, getMonthlySales } from "../database/database.js";
 
 const products = ['Apple', 'Outplay', 'Sentry', 'Discord','Teams','Google','Github','Fullstory','Height','Slack','Zapier','Figma','Appolo','Zoho Crm','Circleci','Notion'];
 
 function apiController() {
     return {
         async totalItems(req, res) {
+            console.log('Total Items');
             const { start_date, end_date, department } = req.body;
 
             // TODO: Validation of the parameters
@@ -21,16 +23,19 @@ function apiController() {
             }
 
             // TODO: Fetch the totalItems sold between the start_date and the end_date
-            
+            const total_items = await getTotalItems(start_date, end_date, department);
 
             // TODO: Return the totalItems
+            return res.json({
+                "total_items": total_items
+            })
         },
 
         async nthMostTotalItem(req, res) {
             const { item_by, start_date, end_date, n } = req.body;
 
             // TODO: Validation of paramters
-            if (!item_by || !['price', 'quantity'].includes(item_by)) {
+            if (!item_by || !['amount', 'seats'].includes(item_by)) {
                 return res.json({
                     'error': 'Invalid item_by value'
                 })
@@ -50,8 +55,13 @@ function apiController() {
             }
 
             // TODO: Fetch the item nth most sold item by the item_by parameter
+            let item = await getNthMostTotalItem(item_by, start_date, end_date, n);
+            console.log(item);
 
             // TODO: Return the item name
+            return res.json({
+                'item': item
+            })
         },
 
         async percentageOfDepartmentWiseSoldItems(req, res) {
@@ -65,8 +75,23 @@ function apiController() {
             };
 
             // TODO: Fetch a list of items sold department wise along with total items 
+            const data = await getPercentage(start_date, end_date);
+
+            console.log(data);
+
+            const totalSeats = data['totalSeats'];
+            const percentages = data['percentages'];
+
+            percentages.forEach(departmentData => {
+                let seats = departmentData.seatSum;
+                seats = parseInt(seats)/parseInt(totalSeats) * 100;
+                departmentData.seatSum = seats.toFixed(2) + '%';
+            })
 
             // TODO: Return the list as json
+            return res.json({
+                "Percentages": percentages
+            })
         },
 
         async monthlySales(req, res) {
@@ -86,9 +111,12 @@ function apiController() {
             }
 
             // TODO: Fetch a list of the amount of products sold in the given year
-            
+            const sales = await getMonthlySales(product, year);
 
             // TODO: Return the list of products sold in the year, monthwise
+            return res.json({
+                'sales': sales
+            });
         }
     }
 }

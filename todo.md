@@ -13,6 +13,6 @@
 
 - [ ] totalItems Controller
     - [x] Extract start_date, end_date, department from request body
-    - [ ] Validate the data 
-    - [ ] Fetch the totalItems sold between the start_date and the end_date
-    
+    - [x] Validate the data 
+    - [x] Fetch the totalItems sold between the start_date and the end_date for the given department
+    - [x] Return the JSON response
