@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "e3e6175e-a0b7-400f-91f9-39b64d592af8",
+		"name": "Volopay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15609024"
+	},
+	"item": [
+		{
+			"name": "Total Items",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Monthly Sales",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Percentage",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Nth Most",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

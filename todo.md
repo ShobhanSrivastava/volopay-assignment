@@ -11,7 +11,7 @@
     - [x] percentageOfDepartmentWiseSoldItems
     - [x] monthlySales
 
-- [ ] totalItems Controller
+- [x] totalItems Controller
     - [x] Extract start_date, end_date, department from request body
     - [x] Validate the data 
     - [x] Fetch the totalItems sold between the start_date and the end_date for the given department

@@ -97,18 +97,31 @@ function apiController() {
         async monthlySales(req, res) {
             const { product, year } = req.body;
 
+            let error = '';
+
             // TODO: Validation of paramters
-            if(!product || !products.includes(product)) {
+            if(!product) {
+                error: 'Product value not present';
+            }
+
+            if(!products.includes(product)) {
+                error: 'Products not in list of available products'
+            }
+            
+            if(!year) {
+                error: 'Year value not present'
+            }
+
+            if(parseInt(year) > 2023 || parseInt(year) < 1970){
+                error: 'Incorrect year value'
+            }
+
+            if(error) {
                 return res.json({
-                    'error': 'Invalid product value'
+                    error
                 })
             }
 
-            if(!year || parseInt(year) > 2023 || parseInt(year) < 1970) {
-                return res.json({
-                    'error': 'Invalid year value'
-                })
-            }
 
             // TODO: Fetch a list of the amount of products sold in the given year
             const sales = await getMonthlySales(product, year);

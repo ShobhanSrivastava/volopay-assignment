@@ -100,6 +100,8 @@ function getMonthlySales(product, year) {
                 monthlySales[month-1] += parseFloat(row['amount'])
             })
 
+            console.log(monthlySales);
+
             resolve(monthlySales);
         })
     })
